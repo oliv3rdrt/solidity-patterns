@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-/// EIP-1153 transient storage — tstore/tload, available since Cancun (March 2024)
-/// Transient storage is cleared at the end of each transaction — no cleanup cost.
+/// EIP-1153 transient storage - tstore/tload, available since Cancun (March 2024)
+/// Transient storage is cleared at the end of each transaction - no cleanup cost.
 contract TransientReentrancyGuard {
     // Slot for the transient lock flag
     uint256 private constant LOCK_SLOT = uint256(keccak256("reentrancy.lock")) - 1;
@@ -36,4 +36,4 @@ contract TransientReentrancyGuard {
 }
 
 // Classic comparison: the old storage-based guard costs 2 SSTOREs (20k + 2.9k gas)
-// The transient version costs 2 TSTOREs (~100 gas each) — ~100x cheaper for the lock
+// The transient version costs 2 TSTOREs (~100 gas each) - ~100x cheaper for the lock

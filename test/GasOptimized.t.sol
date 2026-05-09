@@ -11,7 +11,7 @@ contract GasOptimizedTest is Test {
 
     function setUp() public {
         opt = new GasOptimized();
-        // Seed balances directly via storage slot — gas-free setup
+        // Seed balances directly via storage slot - gas-free setup
         deal(address(opt), 0);
     }
 

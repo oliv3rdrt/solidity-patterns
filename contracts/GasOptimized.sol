@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-/// Gas optimization techniques — custom errors, calldata, packed storage
+/// Gas optimization techniques - custom errors, calldata, packed storage
 contract GasOptimized {
     // Custom errors are cheaper to deploy and revert with than require strings
     error InsufficientBalance(uint256 available, uint256 required);
@@ -10,10 +10,10 @@ contract GasOptimized {
 
     struct PackedListing {
         address seller;   // 20 bytes
-        uint96 price;     // 12 bytes  — shares slot 0 with seller
-        uint64 expiry;    // 8 bytes   — slot 1
-        uint64 tokenId;   // 8 bytes   — slot 1
-        bool active;      // 1 byte    — slot 1
+        uint96 price;     // 12 bytes  - shares slot 0 with seller
+        uint64 expiry;    // 8 bytes   - slot 1
+        uint64 tokenId;   // 8 bytes   - slot 1
+        bool active;      // 1 byte    - slot 1
     }
 
     mapping(uint256 => PackedListing) public listings;
@@ -33,7 +33,7 @@ contract GasOptimized {
         }
     }
 
-    // Cache storage reads in locals — SLOAD is 100 gas, MLOAD is 3 gas
+    // Cache storage reads in locals - SLOAD is 100 gas, MLOAD is 3 gas
     function efficientSumBalances(address[] calldata users) external view returns (uint256 total) {
         for (uint256 i; i < users.length; ) {
             total += balances[users[i]]; // one SLOAD per user
